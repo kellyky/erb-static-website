@@ -1,63 +1,71 @@
-# About
+# Personal Site (Static, ERB-Rendered)
 
-A website and maybe proto-portfolio.
-A place I enjoy working on, while I learn the things and share the learnings.
+A hand-built personal website powered by a lightweight Ruby rendering pipeline.
 
-Created initially as user space within [https://www.aavalam.org/](https://www.aavalam.org/).
+Templates are written in ERB, composed using partials, and compiled into static HTML via a custom build script. Source templates are kept separate from generated output, enabling reusable layout components and a simple, maintainable workflow.
 
-## Visiting
-[https://www.aavalam.org/~kellyky/](https://www.aavalam.org/~kellyky/)
+This project serves as:
+- A home for my “Today I Learned” technical notes
+- An experimentation space for templating and workflow design
+- A deliberately framework-free exercise in structure and maintainability
 
-Or
+## Live Site
 
-[https://kellyky.github.io/website/](https://kellyky.github.io/website/)
+Deployed to both Aavalam and GitHub Pages:
 
+- https://www.aavalam.org/~kellyky/
+- https://kellyky.github.io/website/
 
-## Setup
-No setup needed for visitors to either website above.
-But to view the pages locally:
+## Local Setup
 
-1. Clone the repository
-2. Navigate to it `cd website`
-3. For the URL, use the absolute path with index.html` 
-    - example `file:///Users/me/path/more-of-the-path/website/index.html`
+```sh
+git clone git@github.com:kellyky/erb-static-website.git
+cd erb-static-website
+chmod +x bin/render
+```
 
-Page has a mix of internal/external links.
+To view locally, open `index.html` directly in your browser:
 
-## File Structure
+```sh
+open index.html
+```
+
+Alternatively, open the file using its absolute path — either with open from the command line or by pasting the path into your browser’s address bar:
+
+```sh
+file:///Users/me/path/to/erb-static-website/index.html
+```
+
+## Development Workflow
+
+HTML files are generated artifacts and should not be edited directly.
+
+To make changes:
+
+1. Update the appropriate .erb template or asset file.
+2. Run the render script from the project root.
+
+```sh
+bin/render
+```
+
+This regenerates the corresponding HTML file(s).
+
+## Project Structure
 
 ```plaintext
 ├── README.md
-├── assets
-│   ├── css
-│   │   ├── header_footer.css
-│   │   ├── index.css
-│   │   ├── main.css
-│   │   ├── notes.css
-│   │   └── today_i_learned.css
-│   └── images
-│       ├── keel_achill.jpg
-│       ├── keem_achill.jpg
-│       └── myajima.png
-├── bin
-│   └── render
-├── index.html
-├── notes.html
-├── today_i_learned.html
-└── views
-    ├── index.erb
-    ├── notes.erb
-    ├── partials
-    │   ├── _footer.erb
-    │   └── _header.erb
-    └── today_i_learned.erb
+├── assets/
+│   ├── css/
+│   └── images/
+├── bin/
+│   └── render                  # Static rendering script
+├── index.html                  # Generated output
+└── views/
+    ├── index.erb               # Page structure template
+    └── partials/               # Reusable ERB partials (header, footer)
+        ├── _footer.erb
+        ├── _header.erb
+        └── _main.erb
 ```
 
-## Updates
-First time making updates: `chmod +x bin/render` for executable permissions.
-
-Partials exist for header, footer. Do **not** update html files directly.
-
-Steps
-1. Update the appropriate .erb file(s) - or css/other (just not html directly)
-2. Re-render: run `bin/render` from the root of the project. This (re)creates html files.
